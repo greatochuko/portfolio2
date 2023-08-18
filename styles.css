@@ -279,9 +279,25 @@ section {
 .contact-info {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-    text-align: left;
+    justify-content: space-around;
     flex: 1;
+}
+
+.contact-info a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: inline-block;
+    padding: 1rem;
+}
+
+.contact-info a:hover {
+    text-shadow: 0 0 5px white;
+}
+
+.contact-info i {
+    margin-right: 1rem;
+    font-size: 1.5rem;
 }
 
 /* FOOTER */
