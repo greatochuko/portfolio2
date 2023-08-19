@@ -10,7 +10,7 @@ html {
 
 body {
     font-family: 'Ubuntu', sans-serif;
-    background-color: gray;
+    background-color: #eee;
 }
 
 li {
@@ -42,29 +42,65 @@ header .container {
     height: 100%;
 }
 
-.navbar ul {
+.navbar {
     display: flex;
     justify-content: center;
+    align-items: center;
     padding: max(1.5rem, 2vh);
 }
 
-.navbar ul li a {
+.navbar .logo {
+    font-family: cursive;
+}
+
+.navbar .logo span {
+    color: var(--theme-color);
+}
+
+.navbar__main,
+.navbar__mobile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar__mobile {
+    justify-content: space-between;
+    font-size: 1.5rem;
+    font-family: cursive;
+    display: none;
+    flex: 1;
+}
+
+.navbar__mobile button {
+    background-color: transparent;
     color: white;
-    font-size: max(1rem, 1vw);
+    padding: 0 1rem;
+    border: none;
+    font-size: 1.5rem;
+}
+
+.navbar li.mobile {
+    display: none;
+}
+
+.navbar li a {
+    color: white;
     transition: color 0.3s;
     padding: 1rem;
     font-weight: 500;
     white-space: nowrap;
+    font-size: max(1rem, 1vw);
 }
 
-.navbar ul li a:hover {
+.navbar__main li a:hover {
     color: hsl(190, 200%, 50%);
     text-shadow: 0 0 2px hsl(190, 200%, 50%);
 }
 
 .hero-text {
     width: min(80%, 2000px);
-    font-size: max(2rem, 2vw);
+    font-size: max(2rem, 1.8vw);
     text-align: center;
     position: absolute;
     top: 50%;
@@ -79,7 +115,7 @@ header .container {
 }
 
 .get-in-touch-btn {
-    margin-top: 2rem;
+    margin-top: min(4rem, 4vh);
     font-size: max(2rem, 2vw);
     display: flex;
     align-items: center;
@@ -114,7 +150,7 @@ header .container {
 }
 
 .social-links .github:hover {
-    color: black;
+    color: #555;
 }
 
 .social-links .twitter:hover {
@@ -122,15 +158,16 @@ header .container {
 }
 
 .social-links .email:hover {
-    color: purple;
+    color: peru;
 }
 
 section {
     background-color: #eee;
     color: #111;
-    padding: 5rem 20%;
+    width: 60%;
+    margin: 5rem auto;
     text-align: center;
-    border-bottom: solid 2px #bbb;
+    /* border-bottom: solid 2px #bbb; */
 }
 
 .section__header {
@@ -160,9 +197,9 @@ section {
 }
 
 .about__content {
-    font-size: 1.2rem;
+    font-size: max(1.2rem, 1.2vw);
     font-weight: lighter;
-    line-height: 1.7rem;
+    line-height: max(1.7rem, 1.7vw);
 }
 
 /* SKILL */
@@ -205,15 +242,21 @@ section {
 
 .contact {
     display: flex;
-    padding: 5rem 10%;
+    justify-content: center;
 }
 
-.contact form h3 {
+.contact-mobile {
+    display: none;
+}
+
+.contact form h3,
+.contact-mobile form h3 {
     text-align: left;
     color: #333;
 }
 
-.contact form {
+.contact form,
+.contact-mobile form {
     display: flex;
     flex-direction: column;
     row-gap: 1rem;
@@ -233,6 +276,8 @@ section {
 }
 
 .contact form input,
+.contact-mobile form input,
+.contact-mobile form textarea,
 .contact form textarea {
     padding: .7rem 1rem;
     border-radius: 5px;
@@ -244,12 +289,15 @@ section {
 }
 
 .contact form input:focus,
+.contact-mobile form input:focus,
+.contact-mobile form textarea:focus,
 .contact form textarea:focus {
     box-shadow: 2px 2px 5px #bbb;
 
 }
 
-.contact form button {
+.contact form button,
+.contact-mobile form button {
     background-color: var(--theme-color);
     color: white;
     width: fit-content;
@@ -259,6 +307,10 @@ section {
     cursor: pointer;
     transition: .3s;
     font-size: 1rem;
+}
+
+.contact-mobile form button {
+    width: auto;
 }
 
 .contact form button:hover {
@@ -276,11 +328,19 @@ section {
     row-gap: 2rem;
 }
 
+.contact-mobile .contact-details {
+    padding: .2rem 1rem;
+}
+
 .contact-info {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     flex: 1;
+}
+
+.contact-mobile .contact-info {
+    flex-direction: row;
 }
 
 .contact-info a {
@@ -289,6 +349,12 @@ section {
     justify-content: center;
     display: inline-block;
     padding: 1rem;
+    white-space: nowrap;
+
+}
+
+.contact-mobile .contact-info a {
+    padding: .5rem;
 }
 
 .contact-info a:hover {
@@ -299,6 +365,8 @@ section {
     margin-right: 1rem;
     font-size: 1.5rem;
 }
+
+
 
 /* FOOTER */
 
@@ -311,23 +379,115 @@ footer {
 
 /* MEDIA QUERIES */
 
-@media (max-width:576px) {
-    .navbar ul {
-        justify-content: space-between;
-        padding: 2rem min(1rem, 1vw);
+@media (max-width:992px) {
+    .navbar li.desktop {
+        display: none;
     }
 
-    .navbar ul li a {
-        font-size: min(14px, 10vw);
-        padding: min(2rem, 2vw);
+    .navbar li.mobile {
+        display: block;
     }
 
     .hero-text {
+        width: 85%;
+        font-size: 1.2rem;
+    }
+
+    .get-in-touch-btn {
+        font-size: 1.2rem;
+    }
+
+    .skill-list {
         width: 90%;
-        font-size: 1rem;
+        margin: auto;
+    }
+
+    .skill-list .skill {
+        font-size: 4rem;
+    }
+
+    section {
+        width: 80%;
+    }
+
+    .contact {
+        display: none;
+    }
+
+    .contact-mobile {
+        display: block;
+    }
+
+    .contact-mobile .contact-info i {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width:768px) {
+    .navbar .navbar__main {
+        display: none;
+    }
+
+    .navbar .navbar__mobile {
+        display: flex;
+    }
+}
+
+@media (max-width:576px) {
+
+
+    .navbar .logo {
+        font-size: 2rem;
+    }
+
+    .hero-text {
+        width: 85%;
+        font-size: .8rem;
     }
 
     .get-in-touch-btn {
         font-size: 1rem;
+    }
+
+    .get-in-touch-btn a.btn {
+        padding: .8rem 1.5rem;
+    }
+
+    .skill-list {
+        width: 100%;
+        margin: auto;
+    }
+
+    .skill-list .skill {
+        font-size: 3rem;
+    }
+
+    .about__content {
+        font-size: .8rem;
+    }
+
+    .section__header {
+        font-size: 2rem;
+    }
+
+    section {
+        margin: 3rem auto;
+        width: 90%;
+    }
+
+    .contact-mobile {
+        box-shadow: 2px 2px 5px #ddd;
+    }
+
+    .contact-mobile form {
+        box-shadow: none;
+    }
+
+    .contact-mobile .contact-info i {
+        font-size: .8rem;
+    }
+
+    .contact-mobile form textarea {
+        height: 10rem;
     }
 }
