@@ -78,6 +78,7 @@ header .container {
     padding: 0 1rem;
     border: none;
     font-size: 1.5rem;
+    z-index: 1;
 }
 
 .navbar li.mobile {
@@ -425,7 +426,26 @@ footer {
 
 @media (max-width:768px) {
     .navbar .navbar__main {
-        display: none;
+        transition: .3s;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 0vh;
+        z-index: 1;
+        background-color: #111;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    body.navbar-show {
+        overflow-y: hidden;
+    }
+
+    .navbar .navbar__main.show {
+        height: 75vh;
     }
 
     .navbar .navbar__mobile {
